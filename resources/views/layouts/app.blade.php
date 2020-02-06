@@ -11,6 +11,8 @@
     <link rel="shortcut icon" href="{{ asset('uploads/icon/favicon.ico') }}" type="image/x-icon">
     <!-- CSS Bootstrap -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('/bower/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}">
     <!-- CSS Main web -->
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     <!-- CSS Social Icon Strip Footer -->
@@ -18,12 +20,15 @@
     <!-- Styles -->
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <!-- <link rel="dns-prefetch" href="https://fonts.gstatic.com"> -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.js"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/theme.js') }}"></script>
+    <script src="{{ asset('/bower/moment/moment.js') }}"></script>
+    <script src="{{ asset('/bower/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
     <!-- Scripts -->
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
     
@@ -36,15 +41,22 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <!-- Social media menu (Left side) -->
-                <a class="nav-btn btn-dark btn-lg accordion-toggle pull-left" title="Follow Us"
-                     role="tab" id="social-collapse" data-toggle="collapse" data-parent="#accordion"
-                     data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></a>
+                <a  class="nav-btn btn-dark btn-lg accordion-toggle pull-left" title="Follow Us"
+                    role="tab" id="social-collapse" data-toggle="collapse" data-parent="#accordion"
+                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></a>
                 <!-- Social media menu (Left side) -->
-
+                
                 <!-- Hamburger menu (Right side) -->
-                <a id="menu-toggle" href="#" class="nav-btn btn-dark btn-lg toggle">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!-- <a id="menu-toggle" href="#" class="nav-btn btn-dark btn-lg toggle">
                     <i class="fa fa-bars" style="color:#fff;"></i>
-                </a>
+                </a> -->
                 <!-- Hamburger menu (Right side) -->
 
                 <!-- To top button (bottom right side) -->
@@ -56,15 +68,15 @@
             </div><!-- /.navbar-header -->
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse js-navbar-collapse">
+            <div id="navbar" class="collapse navbar-collapse js-navbar-collapse">
                 <!-- Pull left menu -->
                 <ul class="nav navbar-nav navbar-left">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="{{ url('/') }}">
                         <!-- <img height="25" width="25" src="dist/img/logo-mnrh.jpg" class="img-responsive pull-left" alt="Responsive image"> -->
                         {{ config('app.name', 'กลุ่มงานเวชกรรมสังคม') }}
                     </a>
 
-                    <li><a href="index.html">หน้าหลัก</a></li>
+                    <li><a href="{{ url('/') }}">หน้าหลัก</a></li>
                     <!-- About menu -->
                     <!-- <li class="dropdown mega-dropdown"> -->
                     <li class="dropdown dropdown">
@@ -73,10 +85,10 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">ประวัติความเป็นมา</a></li>
-                            <li><a href="structure.html">โครงสร้างหน่วยงาน</a></li>
-                            <li><a href="vision.html">วิสัยทัศน์</a></li>
-                            <li><a href="mission.html">พันธกิจ</a></li>
-                            <li><a href="goal.html">เข็มมุ่ง</a></li>
+                            <li><a href="{{ url('/site/structure') }}">โครงสร้างหน่วยงาน</a></li>
+                            <li><a href="{{ url('/site/vision') }}">วิสัยทัศน์</a></li>
+                            <li><a href="{{ url('/site/mission') }}">พันธกิจ</a></li>
+                            <li><a href="{{ url('/site/goal') }}">เข็มมุ่ง</a></li>
                             <li class="divider"></li>
                             <li><a href="#">พื้นที่ให้บริการ</a></li>
                         </ul>
@@ -260,8 +272,9 @@
                     </li>
                     <!-- Department menu -->
 
-                    <li><a href="service.html">ข้อมูลการให้บริการ</a></li>
-                    <li><a href="contact.html">ติดต่อเรา</a></li>
+                    <li><a href="{{ url('/site/service') }}">ตารางการให้บริการ</a></li>
+                    <li><a href="{{ url('/site/contactus') }}">ติดต่อเรา</a></li>
+                    <li><a href="{{ url('/site/location') }}">แผนที่</a></li>
                 </ul>
                 <!-- Pull left menu -->
 
@@ -369,7 +382,7 @@
     <!-- Modal dialog -->
 
     <!-- Social media menu component -->
-    <aside id="accordion" class="social text-vertical-center">
+    <!-- <aside id="accordion" class="social text-vertical-center">
         <div class="accordion-social">
             <ul class="panel-collapse collapse in nav nav-stacked" role="tabpanel" aria-labelledby="social-collapse" id="collapseOne">
                 <li>
@@ -409,7 +422,7 @@
                 </li>
             </ul>
         </div>
-    </aside>
+    </aside> -->
     <!-- Social media menu component -->
 
     <!-- <div class="masthead">
@@ -540,11 +553,11 @@
     </div><!-- /.footer -->
     <!-- /.Footer -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
     <script>
         $(document).ready(function(){
             $("[rel='tooltip']").tooltip();
         });
-    </script>
+    </script> -->
 </body>
 </html>

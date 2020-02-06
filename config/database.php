@@ -54,6 +54,20 @@ return [
             'engine' => null,
         ],
 
+        'checkin' => array(
+            'driver'        => 'mysql',
+            'host'          => env('DB_CHIN_HOST', '127.0.0.1'),
+            'port'          => env('DB_CHIN_PORT', '3306'),
+            'database'      => env('DB_CHIN_DATABASE', 'forge'),
+            'username'      => env('DB_CHIN_USERNAME', 'forge'),
+            'password'      => env('DB_CHIN_PASSWORD', 'forge'),
+            'charset'       => 'utf8',
+            'collation'     => 'utf8_unicode_ci',
+            'prefix'        => '',
+            'strict'        => false,
+            'engine'        => null,
+        ),
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
