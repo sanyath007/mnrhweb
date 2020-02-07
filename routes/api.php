@@ -35,10 +35,10 @@ Route::put('/imc/patients/{id}', 'ImcController@updatePatient')->name('updatePat
 Route::delete('/imc/patients/{id}', 'ImcController@deletePatient')->name('deletePatient');
 
 Route::get('/imc/registrations', 'ImcController@registrations')->name('registrations');
-Route::post('/imc/registration', 'ImcController@addRegistration')->name('addRegistration');
+Route::post('/imc/registrations', 'ImcController@addRegistration')->name('addRegistration');
 
 Route::get('/imc/visitions', 'ImcController@visitions')->name('visitions');
-Route::post('/imc/visition', 'ImcController@addVisition')->name('addVisition');
+Route::post('/imc/visitions', 'ImcController@addVisition')->name('addVisition');
 
 Route::get('/imc/changwats', 'ImcController@changwats')->name('changwats');
 Route::get('/imc/amphurs', 'ImcController@amphurs')->name('amphurs');

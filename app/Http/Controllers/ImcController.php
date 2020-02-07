@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use App\Models\Patient;
+use App\Models\Visition;
+use App\Models\Registration;
 
 class ImcController extends Controller
 {
@@ -73,9 +75,7 @@ class ImcController extends Controller
         $patient->latlong = $req['latlong'];
         
         if($patient->save()) {
-            return [
-                $patient,
-            ];
+            return $patient;
         }
     }
 
@@ -150,7 +150,20 @@ class ImcController extends Controller
 
     public function addRegistration(Request $req)
     {
+        $regis = new Registration();
 
+        $regis->pid = $req['pid'];
+        $regis->reg_date = date_format(new \DateTime($req['reg_date']), 'Y-m-d');
+        $regis->dx = $req['dx'];
+        $regis->dx_date = date_format(new \DateTime($req['dx_date']), 'Y-m-d');
+        $regis->dch_hosp = $req['dch_hosp'];
+        $regis->dch_date = date_format(new \DateTime($req['dch_date']), 'Y-m-d');
+        $regis->pcu = $req['pcu'];
+        $regis->reg_status = $req['reg_status'];
+
+        if($regis->save()) {
+            return $regis;
+        }
     }
 
     public function visitions(Request $req)
@@ -182,7 +195,44 @@ class ImcController extends Controller
 
     public function addVisition(Request $req)
     {
+        $visit = new Visition();
 
+        $visit->pid = $req['pid'];
+        $visit->visit_count = $req['visit_count'];
+        $visit->visit_date = $req['visit_date'];
+        $visit->visitors = $req['visitors'];
+        $visit->barthel_score = $req['barthel_score'];
+        $visit->impairment = $req['impairment'];
+        $visit->complication = $req['complication'];
+        $visit->is_rehab = $req['is_rehab'];
+        $visit->visit_status = $req['visit_status'];
+
+        $attachments = '';
+        $allowedfileExtension=['pdf','jpg','png','docx'];
+
+        if($req->hasFile('attachments')) {
+            foreach ($req->file('attachments') as $index => $file) {
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension, $allowedfileExtension);
+                
+                $new_filename = $req['pid']. uniqid('_', true).'.'.$extension;
+
+                if($index == count($req->file('attachments')) - 1) {
+                    $attachments .= $new_filename;
+                } else {
+                    $attachments .= $new_filename .',';
+                }
+
+                $file->move(public_path().'/uploads/imc_pic/', $new_filename);
+            }
+        }
+        
+        $visit->attachments = $attachments;
+
+        if($visit->save()) {
+            return $visit;
+        }
     }
 
     public function changwats()
