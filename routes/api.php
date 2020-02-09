@@ -28,17 +28,23 @@ Route::group(['middleware' => 'jwt.refresh'], function() {
     Route::get('auth/refresh', 'AuthController@refresh');
 });
 
-Route::get('/imc/patients', 'ImcController@patients')->name('patients');
-Route::get('/imc/patients/{id}', 'ImcController@getPatient')->name('getPatient');
-Route::post('/imc/patients', 'ImcController@addPatient')->name('addPatient');
-Route::put('/imc/patients/{id}', 'ImcController@updatePatient')->name('updatePatient');
-Route::delete('/imc/patients/{id}', 'ImcController@deletePatient')->name('deletePatient');
+Route::get('/imc/dashboard', 'ImcController@dashboard')->name('dashboard');
 
-Route::get('/imc/registrations', 'ImcController@registrations')->name('registrations');
-Route::post('/imc/registrations', 'ImcController@addRegistration')->name('addRegistration');
+Route::get('/imc/patients', 'PatientController@patients')->name('patients');
+Route::get('/imc/patients/{id}', 'PatientController@getPatient')->name('getPatient');
+Route::post('/imc/patients', 'PatientController@addPatient')->name('addPatient');
+Route::put('/imc/patients/{id}', 'PatientController@updatePatient')->name('updatePatient');
+Route::delete('/imc/patients/{id}', 'PatientController@deletePatient')->name('deletePatient');
 
-Route::get('/imc/visitions', 'ImcController@visitions')->name('visitions');
-Route::post('/imc/visitions', 'ImcController@addVisition')->name('addVisition');
+Route::get('/imc/registrations', 'RegistrationController@registrations')->name('registrations');
+Route::post('/imc/registrations', 'RegistrationController@addRegistration')->name('addRegistration');
+
+Route::get('/imc/visitions', 'VisitionController@visitions')->name('visitions');
+Route::post('/imc/visitions', 'VisitionController@addVisition')->name('addVisition');
+
+Route::get('/imc/barthels', 'BarthelController@index')->name('index');
+Route::get('/imc/barthels/{pid}', 'BarthelController@detail')->name('detail');
+Route::post('/imc/barthels', 'BarthelController@store')->name('store');
 
 Route::get('/imc/changwats', 'ImcController@changwats')->name('changwats');
 Route::get('/imc/amphurs', 'ImcController@amphurs')->name('amphurs');
