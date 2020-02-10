@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use App\Models\Icd101;
 
 class ImcController extends Controller
 {
@@ -63,7 +64,8 @@ class ImcController extends Controller
     {
         $sql = "SELECT hospcode, CONCAT(hospcode, '-', hosptype, name) AS name 
                 FROM hospcode 
-                WHERE (chwpart='30') AND (hospital_type_id IN (3,8,9,13))";
+                WHERE (chwpart='30') AND (hospital_type_id IN (3,8,9,13)) 
+                AND (hospcode IN ('14834', '14835', '15060', '12466', '14696')) ";
     
         return [
             'pcus' => \DB::select($sql),
@@ -72,27 +74,10 @@ class ImcController extends Controller
 
     public function icd10s(Request $req)
     {
-        // echo 'page=' .$req['page'];
-        $perpage = 10;
-        $page = (isset($req['page'])) ? $req['page'] : 1;
-        $offset = ($page * $perpage) - $perpage;
-
-        $sql = "SELECT * FROM icd101 ";
-        
-        $count = count(\DB::select($sql));
-
-        $sql .= "LIMIT $offset, $perpage ";
-
-        $items = \DB::select($sql);
-        
-        $paginator = new Paginator($items, $count, $perpage, $page, [
-            'path' => $req->url(),
-            'query' => $req->query()
-        ]);
+        $icd10s = Icd101::paginate(10);
 
         return [
-            'pager' => $paginator,
-            'page' => $page
+            'icd10s' => $icd10s
         ];
     }
 

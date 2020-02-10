@@ -37,10 +37,16 @@ Route::put('/imc/patients/{id}', 'PatientController@updatePatient')->name('updat
 Route::delete('/imc/patients/{id}', 'PatientController@deletePatient')->name('deletePatient');
 
 Route::get('/imc/registrations', 'RegistrationController@registrations')->name('registrations');
-Route::post('/imc/registrations', 'RegistrationController@addRegistration')->name('addRegistration');
+Route::post('/imc/registrations', 'RegistrationController@store')->name('store');
+Route::get('/imc/registrations/{id}', 'RegistrationController@edit')->name('edit');
+Route::put('/imc/registrations/{id}', 'RegistrationController@update')->name('update');
+Route::delete('/imc/registrations/{id}', 'RegistrationController@delete')->name('delete');
 
 Route::get('/imc/visitions', 'VisitionController@visitions')->name('visitions');
-Route::post('/imc/visitions', 'VisitionController@addVisition')->name('addVisition');
+Route::post('/imc/visitions', 'VisitionController@addVisition')->name('store');
+Route::get('/imc/visitions/{id}', 'VisitionController@store')->name('edit');
+Route::put('/imc/visitions/{id}', 'VisitionController@updatePatient')->name('update');
+Route::delete('/imc/visitions/{id}', 'VisitionController@deletePatient')->name('delete');
 
 Route::get('/imc/barthels', 'BarthelController@index')->name('index');
 Route::get('/imc/barthels/{pid}', 'BarthelController@detail')->name('detail');
