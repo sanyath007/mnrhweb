@@ -43,10 +43,10 @@ Route::put('/imc/registrations/{id}', 'RegistrationController@update')->name('up
 Route::delete('/imc/registrations/{id}', 'RegistrationController@delete')->name('delete');
 
 Route::get('/imc/visitions', 'VisitionController@visitions')->name('visitions');
-Route::post('/imc/visitions', 'VisitionController@addVisition')->name('store');
-Route::get('/imc/visitions/{id}', 'VisitionController@store')->name('edit');
-Route::put('/imc/visitions/{id}', 'VisitionController@updatePatient')->name('update');
-Route::delete('/imc/visitions/{id}', 'VisitionController@deletePatient')->name('delete');
+Route::post('/imc/visitions', 'VisitionController@store')->name('store');
+Route::get('/imc/visitions/{id}', 'VisitionController@edit')->name('edit');
+Route::put('/imc/visitions/{id}', 'VisitionController@update')->name('update');
+Route::delete('/imc/visitions/{id}', 'VisitionController@delete')->name('delete');
 
 Route::get('/imc/barthels', 'BarthelController@index')->name('index');
 Route::get('/imc/barthels/{pid}', 'BarthelController@detail')->name('detail');
