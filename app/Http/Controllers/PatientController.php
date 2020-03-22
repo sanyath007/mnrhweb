@@ -47,6 +47,27 @@ class PatientController extends Controller
 
     public function addPatient(Request $req)
     {
+        $req->validate([
+            'pid' => 'required|string',
+            'hn' => 'required|string',
+            'cid' => 'required|string',
+            'pname' => 'required|string',
+            'fname' => 'required|string',
+            'lname' => 'required|string',
+            'birthdate' => 'required|date',
+            'age_y' => 'required|string',
+            'sex' => 'required|string',
+            'address' => 'required|string',
+            // 'moo' => 'required|string',
+            // 'road' => 'required|string',
+            'changwat' => 'required|string',
+            'amphur' => 'required|string',
+            'tambon' => 'required|string',
+            'zipcode' => 'required|string',
+            'latlong' => 'required|string',
+            // 'tel' => 'required|string',
+        ]);
+
         $patient = new Patient();
 
         $patient->pid = $req['pid'];
@@ -58,7 +79,6 @@ class PatientController extends Controller
         $patient->birthdate = $req['birthdate'];
         $patient->age_y = $req['ageY'];
         $patient->sex = $req['sex'];
-        $patient->tel = $req['tel'];
         $patient->address = $req['address'];
         $patient->moo = $req['moo'];
         $patient->road = $req['road'];
@@ -67,6 +87,7 @@ class PatientController extends Controller
         $patient->changwat = $req['changwat'];
         $patient->zipcode = $req['zipcode'];
         $patient->latlong = $req['latlong'];
+        $patient->tel = $req['tel'];
         
         if($patient->save()) {
             return $patient;

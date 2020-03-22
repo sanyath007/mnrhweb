@@ -39,6 +39,14 @@ class VisitionController extends Controller
 
     public function store(Request $req)
     {
+        $req->validate([
+            'pid' => 'required|string',
+            'visit_date' => 'required|date',
+            'barthel_score' => 'required|string',
+            'impairment' => 'required|string',
+            'complication' => 'required|string'
+        ]);
+
         $visit = new Visition();
 
         $visit->pid = $req['pid'];

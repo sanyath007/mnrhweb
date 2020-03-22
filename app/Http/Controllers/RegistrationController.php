@@ -16,8 +16,8 @@ class RegistrationController extends Controller
         $offset = ($page * $perpage) - $perpage;
 
         $sql = "SELECT r.*, p.pname, p.fname, p.lname, p.age_y,
-                CONCAT(h.hospcode, ' ', h.name) as dch_hosp, 
-                CONCAT(pcu.hospcode, ' ', pcu.name) as pcu 
+                CONCAT(r.dch_hosp, ' ', h.name) as dch_hosp, 
+                CONCAT(r.pcu, ' ', pcu.name) as pcu 
                 FROM imc_patient_registration r 
                 LEFT JOIN imc_patient p ON (r.pid=p.pid) 
                 LEFT JOIN hospcode h ON (r.dch_hosp=h.hospcode)
@@ -42,6 +42,16 @@ class RegistrationController extends Controller
 
     public function store(Request $req)
     {
+        $req->validate([
+            'pid' => 'required|string',
+            'reg_date' => 'required|date',
+            'dx' => 'required|string',
+            'dx_date' => 'required|date',
+            'dch_hosp' => 'required|string',
+            'dch_date' => 'required|date',
+            'pcu' => 'required|string'
+        ]);
+        
         $regis = new Registration();
 
         $regis->pid = $req['pid'];
